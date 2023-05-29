@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   delete "/logout", to:"session#destroy"
   post "/project_create", to:"projects#create"
   post "project_membership", to:"project_memberships#create"
+  post "all_projects", to:"projects#index"
+  post "get_user", to:"users#show"
 
   resources :users do
     resources :projects, only: [:index, :create]
