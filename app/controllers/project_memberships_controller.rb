@@ -9,6 +9,17 @@ class ProjectMembershipsController < ApplicationController
         end
     end
 
+    def index
+        project_memberships = ProjectMembership.where(project_id:params[:project_id])
+        render json: project_memberships
+    end
+
+    def toggle_is_approved
+        project = ProjectMembership.find(params[:id])
+        project.is_approved = !project.is_approved
+        project.save
+    end
+
     private
 
     def project_membership_params

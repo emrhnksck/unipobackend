@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   post "project_membership", to:"project_memberships#create"
   post "all_projects", to:"projects#index"
   post "get_user", to:"users#show"
+  post "approve", to:"project_memberships#toggle_is_approved"
+  post "get_memberships", to:"project_memberships#index"
 
   resources :users do
     resources :projects, only: [:index, :create]
