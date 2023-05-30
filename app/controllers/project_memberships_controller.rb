@@ -14,10 +14,19 @@ class ProjectMembershipsController < ApplicationController
         render json: project_memberships
     end
 
+    def destroy
+
+    end
+
     def toggle_is_approved
         project = ProjectMembership.find(params[:id])
         project.is_approved = !project.is_approved
         project.save
+    end
+
+    def user_projects
+        user_projects = ProjectMembership.where(user:params[:user_id])
+        render json: user_projects, status: :ok
     end
 
     private

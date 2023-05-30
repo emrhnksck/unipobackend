@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_29_214051) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_30_195830) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,6 +32,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_29_214051) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "owner"
+    t.integer "university_id"
+  end
+
+  create_table "todos", force: :cascade do |t|
+    t.text "description"
+    t.boolean "is_done", default: false
+    t.bigint "project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_todos_on_project_id"
+  end
+
+  create_table "universities", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -39,8 +55,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_29_214051) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "university_id"
+    t.index ["university_id"], name: "index_users_on_university_id"
   end
 
   add_foreign_key "project_memberships", "projects"
   add_foreign_key "project_memberships", "users"
+  add_foreign_key "todos", "projects"
+  add_foreign_key "users", "universities"
 end

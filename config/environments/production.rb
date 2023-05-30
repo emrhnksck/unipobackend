@@ -84,4 +84,5 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
   config.hosts << "2368-85-98-225-95.ngrok-free.app/login"
+  config.hosts << "adcc-85-97-126-7.ngrok-free.app"
 end

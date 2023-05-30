@@ -32,6 +32,11 @@ class ProjectsController < ApplicationController
         project.destroy
         head :no_content
       end
+
+      def university_projects
+        universities = Project.where(university_id:params[:university_id])
+        render json: universities, status: :ok
+      end
     
       private
     
